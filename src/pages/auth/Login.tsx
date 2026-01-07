@@ -25,7 +25,7 @@ export const formSchema = z.object({
 
 export default function Login() {
   const { mutate, isPending } = useLogin();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,13 +38,14 @@ export default function Login() {
     console.log(data);
     mutate(data, {
       onSuccess: (res) => {
-        Cookie.set("token", res.data.token);
-        Cookie.set("role", res.data.user.role.toLowerCase());
-        toast.success(res.message.uz, {
+        console.log(res);
+        Cookie.set("token", res.accessToken);
+        Cookie.set("role", res.role.toLowerCase());
+        toast.success(res.message, {
           position: "bottom-right",
         });
 
-        navigate(`/app/${res.data.user.role.toLowerCase()}`);
+        // navigate(`/app/${res.data.user.role.toLowerCase()}`);
       },
       onError: (error) => {
         console.log(error);
