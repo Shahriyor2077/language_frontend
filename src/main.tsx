@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
-
+// test
 
 const client = new QueryClient({
    defaultOptions: {
