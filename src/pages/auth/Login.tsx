@@ -25,7 +25,7 @@ export const formSchema = z.object({
 
 export default function Login() {
   const { mutate, isPending } = useLogin();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -44,8 +44,7 @@ export default function Login() {
         toast.success(res.message, {
           position: "bottom-right",
         });
-
-        // navigate(`/app/${res.data.user.role.toLowerCase()}`);
+        navigate(`/app/${res.role.toLowerCase()}`);
       },
       onError: (error) => {
         console.log(error);
