@@ -44,7 +44,7 @@ export default function Login() {
         toast.success(res.message, {
           position: "bottom-right",
         });
-        navigate(`/app/${res.role.toLowerCase()}`);
+        navigate(`/app/${res.role.toLowerCase()}/lessons`);
       },
       onError: (error) => {
         console.log(error);
