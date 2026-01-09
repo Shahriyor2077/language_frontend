@@ -43,6 +43,20 @@ export interface TeacherProfile {
   lessons: LessonSummary[];
 }
 
+export interface TeacherField {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  specification: TeacherSpecialty;
+  level: TeacherLevel;
+  description: string | null;
+  hourPrice: number | null;
+  portfolioLink: string | null;
+  imageUrl: string | null;
+  experience: string;
+  cardNumber: string;
+}
+
 export interface LessonResponse {
   id: string;
   status: string;
@@ -79,9 +93,8 @@ export interface Lesson {
   id: string;
   name: string;
   status: LessonStatus;
-  price: string | number; // Decimal usually returns as string to preserve precision
+  price: string | number;
 
-  // Timestamps (ISO Strings from JSON)
   startTime: string;
   endTime: string;
   bookedAt: string;
@@ -90,14 +103,12 @@ export interface Lesson {
   updatedAt: string;
   deletedAt: string | null;
 
-  // External & Logic
   googleMeetsUrl: string;
   googleEventId: string | null;
   remainedLessonId: string | null;
   isPaid: boolean;
   isDeleted: boolean;
 
-  // Foreign Keys
   teacherId: string;
   studentId: string;
 

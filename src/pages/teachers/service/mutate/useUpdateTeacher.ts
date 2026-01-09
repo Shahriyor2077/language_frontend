@@ -1,18 +1,10 @@
 import { request } from "@/config/request";
 import { useMutation } from "@tanstack/react-query";
+import type { TeacherField } from "../../TeacherTypes";
 
-export const useUpdateTeacherProfile = (id: string) => {
+export const useUpdateTeacherProfile = (teacherId: string) => {
   return useMutation({
-    mutationFn: (
-      payload: Partial<{
-        id: string;
-        phoneNumber: string;
-        specification: string;
-        level: string;
-        experience: string;
-        hourPrice: number;
-        portfolioLink: string;
-      }>
-    ) => request.patch(`/teacher/${payload.id}`, payload),
+    mutationFn: (data: TeacherField) =>
+      request.patch(`/teacher/${teacherId}`, data),
   });
 };
