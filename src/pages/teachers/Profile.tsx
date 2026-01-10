@@ -119,6 +119,15 @@ const Profile = () => {
       return;
     }
 
+    if (
+      !form.cardNumber ||
+      form.cardNumber.trim() === "" ||
+      form.cardNumber.length < 16
+    ) {
+      toast.error("Card number is required and must be 16 digits");
+      return;
+    }
+
     // --- 2. CHECK FOR ACTUAL CHANGES ---
     // We compare form state against the current teacher data from the query
     const hasChanges =
@@ -385,6 +394,51 @@ const Profile = () => {
                 ) : (
                   <p className="text-slate-400 dark:text-slate-500">
                     Not provided
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                  Teacher experience
+                </label>
+                {isEdit ? (
+                  <Input
+                    value={form.experience}
+                    onChange={(e) =>
+                      setForm({ ...form, experience: e.target.value })
+                    }
+                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                  />
+                ) : (
+                  <p className="text-slate-600 dark:text-slate-400">
+                    {teacher.experience || "Not set"}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                  Teacher Card
+                </label>
+                {isEdit ? (
+                  <Input
+                    value={form.cardNumber}
+                    onChange={(e) => {
+                      const value = e.target.value
+                        .replace(/\D/g, "") // remove non-digits
+                        .slice(0, 17); // limit to 16 digits
+
+                      setForm({ ...form, cardNumber: value });
+                    }}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    maxLength={16}
+                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                  />
+                ) : (
+                  <p className="text-slate-600 dark:text-slate-400">
+                    {teacher.cardNumber || "Not set"}
                   </p>
                 )}
               </div>
