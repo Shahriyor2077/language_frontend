@@ -116,6 +116,13 @@ export interface Lesson {
   student?: any;
 }
 
+export interface LessonField {
+  name: string;
+  startTime: string;
+  endTime: string;
+  price: number;
+}
+
 export interface GetTeacherLessonsResponse {
   message: string;
   lessons: Lesson[];
