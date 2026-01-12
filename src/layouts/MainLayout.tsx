@@ -4,7 +4,6 @@ import NavbarLayout from "./NavbarLayout";
 import Header from "@/components/header/Header";
 import Cookie from "js-cookie";
 
-
 const MainLayout = () => {
   const location = useLocation();
   const cookieRole = Cookie.get("role");
@@ -20,6 +19,7 @@ const MainLayout = () => {
   return (
     <SidebarProvider>
       <NavbarLayout role={role} />
+      {/* <Header /> */}
       <main className="grow">
         <div className="p-3">
           <SidebarTrigger className="cursor-pointer" />
