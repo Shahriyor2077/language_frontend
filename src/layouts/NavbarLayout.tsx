@@ -69,7 +69,9 @@ const NavbarLayout = ({ role }: { role: RoleType }) => {
             className="w-full justify-start"
             onClick={() =>
               navigate(
-                role === "teacher" ? "/app/teacher/profile" : "/app/admin/profile"
+                role === "teacher"
+                  ? "/app/teacher/profile"
+                  : "/app/admin/profile"
               )
             }
           >
