@@ -4,6 +4,7 @@ import { useUpdateTeacherProfile } from "./service/mutate/useUpdateTeacher";
 import { useAuth } from "@/hooks/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import Cookie from "js-cookie";
 
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -34,6 +35,8 @@ const Profile = () => {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = useTeacherProfile();
+  console.log(data)
+  Cookie.set("teacherName", data?.teacher.fullName || "");
 
   const teacherId = user?.id;
   const { mutate: updateProfile, isPending: isUpdating } =
