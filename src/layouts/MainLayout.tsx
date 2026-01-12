@@ -1,7 +1,9 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Outlet, useLocation } from "react-router-dom";
 import NavbarLayout from "./NavbarLayout";
+import Header from "@/components/header/Header";
 import Cookie from "js-cookie";
+
 
 const MainLayout = () => {
   const location = useLocation();
