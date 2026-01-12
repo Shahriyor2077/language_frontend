@@ -324,7 +324,6 @@ const Admins = () => {
                           </FormControl>
                           <SelectContent>
                             <SelectItem value="admin">Admin</SelectItem>
-                            <SelectItem value="superAdmin">Super Admin</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormMessage />
