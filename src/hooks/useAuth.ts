@@ -1,4 +1,3 @@
-// hooks/useAuth.ts or utils/auth.ts
 import { jwtDecode } from "jwt-decode";
 import Cookie from "js-cookie";
 
