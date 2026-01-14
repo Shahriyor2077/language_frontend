@@ -59,12 +59,26 @@ const Profile = () => {
 
   // Get current user from localStorage
   const currentUser = JSON.parse(localStorage.getItem("admin") || "{}");
+  const isEnvSuperAdmin = currentUser?.id === "env-superadmin";
 
   const { data: admin, isLoading } = useQuery({
     queryKey: ["admin-profile", currentUser?.id],
     queryFn: () => adminService.getById(currentUser?.id),
-    enabled: !!currentUser?.id,
+    enabled: !!currentUser?.id && !isEnvSuperAdmin,
   });
+
+  // Env superadmin uchun statik ma'lumotlar
+  const envSuperAdminData = {
+    id: "env-superadmin",
+    username: "superadmin",
+    phoneNumber: "-",
+    role: "superAdmin" as AdminRole,
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  const displayAdmin = isEnvSuperAdmin ? envSuperAdminData : admin;
 
   const updateMutation = useMutation({
     mutationFn: (data: UpdateProfileFormData) =>
@@ -120,7 +134,7 @@ const Profile = () => {
     });
   }
 
-  if (isLoading) {
+  if (isLoading && !isEnvSuperAdmin) {
     return (
       <div className="space-y-6">
         <Skeleton className="h-8 w-48" />
@@ -148,117 +162,121 @@ const Profile = () => {
           </p>
         </div>
         <div className="flex gap-2">
-          <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-            <DialogTrigger asChild>
-              <Button variant="outline">
-                <Pencil className="mr-2 h-4 w-4" />
-                Tahrirlash
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle>Profilni tahrirlash</DialogTitle>
-              </DialogHeader>
-              <Form {...profileForm}>
-                <form onSubmit={profileForm.handleSubmit((data) => updateMutation.mutate(data))} className="space-y-4">
-                  <FormField
-                    control={profileForm.control}
-                    name="username"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Username</FormLabel>
-                        <FormControl>
-                          <Input placeholder="admin_user" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={profileForm.control}
-                    name="phoneNumber"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Telefon</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+998901234567" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" className="w-full" disabled={updateMutation.isPending}>
-                    {updateMutation.isPending ? "Saqlanmoqda..." : "Saqlash"}
-                  </Button>
-                </form>
-              </Form>
-            </DialogContent>
-          </Dialog>
+          {!isEnvSuperAdmin && (
+            <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline">
+                  <Pencil className="mr-2 h-4 w-4" />
+                  Tahrirlash
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Profilni tahrirlash</DialogTitle>
+                </DialogHeader>
+                <Form {...profileForm}>
+                  <form onSubmit={profileForm.handleSubmit((data) => updateMutation.mutate(data))} className="space-y-4">
+                    <FormField
+                      control={profileForm.control}
+                      name="username"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Username</FormLabel>
+                          <FormControl>
+                            <Input placeholder="admin_user" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={profileForm.control}
+                      name="phoneNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefon</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+998901234567" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit" className="w-full" disabled={updateMutation.isPending}>
+                      {updateMutation.isPending ? "Saqlanmoqda..." : "Saqlash"}
+                    </Button>
+                  </form>
+                </Form>
+              </DialogContent>
+            </Dialog>
+          )}
 
-          <Dialog open={isPasswordOpen} onOpenChange={setIsPasswordOpen}>
-            <DialogTrigger asChild>
-              <Button variant="outline">
-                <Key className="mr-2 h-4 w-4" />
-                Parolni o'zgartirish
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <DialogHeader>
-                <DialogTitle>Parolni o'zgartirish</DialogTitle>
-              </DialogHeader>
-              <Form {...passwordForm}>
-                <form onSubmit={passwordForm.handleSubmit((data) => changePasswordMutation.mutate(data))} className="space-y-4">
-                  <FormField
-                    control={passwordForm.control}
-                    name="currentPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Joriy parol</FormLabel>
-                        <FormControl>
-                          <PasswordInput placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={passwordForm.control}
-                    name="newPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Yangi parol</FormLabel>
-                        <FormControl>
-                          <PasswordInput placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={passwordForm.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Parolni tasdiqlash</FormLabel>
-                        <FormControl>
-                          <PasswordInput placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" className="w-full" disabled={changePasswordMutation.isPending}>
-                    {changePasswordMutation.isPending ? "Saqlanmoqda..." : "O'zgartirish"}
-                  </Button>
-                </form>
-              </Form>
-            </DialogContent>
-          </Dialog>
+          {!isEnvSuperAdmin && (
+            <Dialog open={isPasswordOpen} onOpenChange={setIsPasswordOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline">
+                  <Key className="mr-2 h-4 w-4" />
+                  Parolni o'zgartirish
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Parolni o'zgartirish</DialogTitle>
+                </DialogHeader>
+                <Form {...passwordForm}>
+                  <form onSubmit={passwordForm.handleSubmit((data) => changePasswordMutation.mutate(data))} className="space-y-4">
+                    <FormField
+                      control={passwordForm.control}
+                      name="currentPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Joriy parol</FormLabel>
+                          <FormControl>
+                            <PasswordInput placeholder="••••••••" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={passwordForm.control}
+                      name="newPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Yangi parol</FormLabel>
+                          <FormControl>
+                            <PasswordInput placeholder="••••••••" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={passwordForm.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Parolni tasdiqlash</FormLabel>
+                          <FormControl>
+                            <PasswordInput placeholder="••••••••" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit" className="w-full" disabled={changePasswordMutation.isPending}>
+                      {changePasswordMutation.isPending ? "Saqlanmoqda..." : "O'zgartirish"}
+                    </Button>
+                  </form>
+                </Form>
+              </DialogContent>
+            </Dialog>
+          )}
         </div>
       </div>
 
 
-      {admin && (
+      {displayAdmin && (
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
@@ -270,22 +288,22 @@ const Profile = () => {
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between py-2 border-b">
                 <span className="text-muted-foreground">Username</span>
-                <span className="font-medium">{admin.username}</span>
+                <span className="font-medium">{displayAdmin.username}</span>
               </div>
               <div className="flex items-center justify-between py-2 border-b">
                 <span className="text-muted-foreground flex items-center gap-2">
                   <Phone className="h-4 w-4" />
                   Telefon
                 </span>
-                <span className="font-medium">{admin.phoneNumber}</span>
+                <span className="font-medium">{displayAdmin.phoneNumber}</span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span className="text-muted-foreground flex items-center gap-2">
                   <Shield className="h-4 w-4" />
                   Rol
                 </span>
-                <Badge variant={admin.role === "superAdmin" ? "default" : "secondary"}>
-                  {roleLabels[admin.role]}
+                <Badge variant={displayAdmin.role === "superAdmin" ? "default" : "secondary"}>
+                  {roleLabels[displayAdmin.role]}
                 </Badge>
               </div>
             </CardContent>
@@ -301,20 +319,20 @@ const Profile = () => {
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between py-2 border-b">
                 <span className="text-muted-foreground">Holat</span>
-                <Badge variant={admin.isActive ? "default" : "destructive"}>
-                  {admin.isActive ? "Faol" : "Nofaol"}
+                <Badge variant={displayAdmin.isActive ? "default" : "destructive"}>
+                  {displayAdmin.isActive ? "Faol" : "Nofaol"}
                 </Badge>
               </div>
               <div className="flex items-center justify-between py-2 border-b">
                 <span className="text-muted-foreground">Yaratilgan</span>
                 <span className="font-medium">
-                  {new Date(admin.createdAt).toLocaleString("uz-UZ")}
+                  {new Date(displayAdmin.createdAt).toLocaleString("uz-UZ")}
                 </span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span className="text-muted-foreground">Oxirgi yangilanish</span>
                 <span className="font-medium">
-                  {new Date(admin.updatedAt).toLocaleString("uz-UZ")}
+                  {new Date(displayAdmin.updatedAt).toLocaleString("uz-UZ")}
                 </span>
               </div>
             </CardContent>

@@ -8,7 +8,6 @@ export const useInitiateGoogleAuth = () => {
       return;
     }
 
-    alert(apiUrl);
     // Changed to /auth/google (not /auth/google/callback)
     window.location.href = `${apiUrl}/auth/google/callback`;
   };

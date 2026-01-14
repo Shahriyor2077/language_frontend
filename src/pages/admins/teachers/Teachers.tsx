@@ -105,6 +105,10 @@ const Teachers = () => {
   const [deletingTeacher, setDeletingTeacher] = useState<Teacher | null>(null);
   const queryClient = useQueryClient();
 
+  const currentUser = JSON.parse(localStorage.getItem("admin") || "{}");
+  const isAdmin = currentUser?.role === "admin";
+  const isSuperAdmin = currentUser?.role === "superAdmin";
+
   const { data, isLoading } = useQuery({
     queryKey: ["teachers"],
     queryFn: teacherService.getAll,
@@ -231,201 +235,203 @@ const Teachers = () => {
           <h1 className="text-2xl font-bold">O'qituvchilar</h1>
           <p className="text-muted-foreground">Barcha o'qituvchilarni boshqarish</p>
         </div>
-        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={() => createForm.reset()}>
-              <Plus className="mr-2 h-4 w-4" />
-              Yangi o'qituvchi
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Yangi o'qituvchi qo'shish</DialogTitle>
-            </DialogHeader>
-            <Form {...createForm}>
-              <form onSubmit={createForm.handleSubmit(onCreateSubmit)} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={createForm.control}
-                    name="fullName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>To'liq ism *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Ism familiya" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={createForm.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email *</FormLabel>
-                        <FormControl>
-                          <Input type="email" placeholder="email@example.com" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={createForm.control}
-                    name="phoneNumber"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Telefon *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="+998901234567" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={createForm.control}
-                    name="cardNumber"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Karta raqami *</FormLabel>
-                        <FormControl>
-                          <Input placeholder="8600123456789012" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={createForm.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Parol *</FormLabel>
-                        <FormControl>
-                          <PasswordInput placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={createForm.control}
-                    name="confirm_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Parolni tasdiqlash *</FormLabel>
-                        <FormControl>
-                          <PasswordInput placeholder="••••••••" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <FormField
-                    control={createForm.control}
-                    name="specification"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mutaxassislik</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
+        {isAdmin && (
+          <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={() => createForm.reset()}>
+                <Plus className="mr-2 h-4 w-4" />
+                Yangi o'qituvchi
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Yangi o'qituvchi qo'shish</DialogTitle>
+              </DialogHeader>
+              <Form {...createForm}>
+                <form onSubmit={createForm.handleSubmit(onCreateSubmit)} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={createForm.control}
+                      name="fullName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>To'liq ism *</FormLabel>
                           <FormControl>
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
+                            <Input placeholder="Ism familiya" {...field} />
                           </FormControl>
-                          <SelectContent>
-                            {Object.entries(specialtyLabels).map(([key, label]) => (
-                              <SelectItem key={key} value={key}>
-                                {label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={createForm.control}
-                    name="level"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Daraja</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={createForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email *</FormLabel>
                           <FormControl>
-                            <SelectTrigger>
-                              <SelectValue />
-                            </SelectTrigger>
+                            <Input type="email" placeholder="email@example.com" {...field} />
                           </FormControl>
-                          <SelectContent>
-                            {Object.entries(levelLabels).map(([key, label]) => (
-                              <SelectItem key={key} value={key}>
-                                {label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={createForm.control}
+                      name="phoneNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Telefon *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="+998901234567" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={createForm.control}
+                      name="cardNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Karta raqami *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="8600123456789012" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={createForm.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Parol *</FormLabel>
+                          <FormControl>
+                            <PasswordInput placeholder="••••••••" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={createForm.control}
+                      name="confirm_password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Parolni tasdiqlash *</FormLabel>
+                          <FormControl>
+                            <PasswordInput placeholder="••••••••" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={createForm.control}
+                      name="specification"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Mutaxassislik</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {Object.entries(specialtyLabels).map(([key, label]) => (
+                                <SelectItem key={key} value={key}>
+                                  {label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={createForm.control}
+                      name="level"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Daraja</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {Object.entries(levelLabels).map(([key, label]) => (
+                                <SelectItem key={key} value={key}>
+                                  {label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <FormField
+                      control={createForm.control}
+                      name="hourPrice"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Soatlik narx (so'm)</FormLabel>
+                          <FormControl>
+                            <Input type="number" placeholder="50000" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={createForm.control}
+                      name="experience"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Tajriba</FormLabel>
+                          <FormControl>
+                            <Input placeholder="5 yil" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                   <FormField
                     control={createForm.control}
-                    name="hourPrice"
+                    name="description"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Soatlik narx (so'm)</FormLabel>
+                        <FormLabel>Tavsif</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="50000" {...field} />
+                          <Textarea placeholder="O'qituvchi haqida..." {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={createForm.control}
-                    name="experience"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Tajriba</FormLabel>
-                        <FormControl>
-                          <Input placeholder="5 yil" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <FormField
-                  control={createForm.control}
-                  name="description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Tavsif</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="O'qituvchi haqida..." {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" className="w-full" disabled={createMutation.isPending}>
-                  {createMutation.isPending ? "Saqlanmoqda..." : "Qo'shish"}
-                </Button>
-              </form>
-            </Form>
-          </DialogContent>
-        </Dialog>
+                  <Button type="submit" className="w-full" disabled={createMutation.isPending}>
+                    {createMutation.isPending ? "Saqlanmoqda..." : "Qo'shish"}
+                  </Button>
+                </form>
+              </Form>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
@@ -494,9 +500,11 @@ const Teachers = () => {
                       <Button variant="ghost" size="icon" onClick={() => openEditDialog(teacher)}>
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button variant="ghost" size="icon" onClick={() => setDeletingTeacher(teacher)}>
-                        <Trash2 className="h-4 w-4 text-red-500" />
-                      </Button>
+                      {isSuperAdmin && (
+                        <Button variant="ghost" size="icon" onClick={() => setDeletingTeacher(teacher)}>
+                          <Trash2 className="h-4 w-4 text-red-500" />
+                        </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>

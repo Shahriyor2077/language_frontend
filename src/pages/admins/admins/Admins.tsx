@@ -469,7 +469,6 @@ const Admins = () => {
       </div>
 
 
-      {/* Delete Confirm Dialog */}
       <ConfirmDialog
         open={!!deletingAdmin}
         onOpenChange={() => setDeletingAdmin(null)}
@@ -480,7 +479,6 @@ const Admins = () => {
         isLoading={deleteMutation.isPending}
       />
 
-      {/* Edit Dialog */}
       <Dialog open={!!editingAdmin} onOpenChange={() => setEditingAdmin(null)}>
         <DialogContent className="max-w-md">
           <DialogHeader>
@@ -528,8 +526,12 @@ const Admins = () => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="admin">Admin</SelectItem>
-                          <SelectItem value="superAdmin">Super Admin</SelectItem>
+                          {editingAdmin?.role !== "superAdmin" && (
+                            <SelectItem value="admin">Admin</SelectItem>
+                          )}
+                          {editingAdmin?.role !== "admin" && (
+                            <SelectItem value="superAdmin">Super Admin</SelectItem>
+                          )}
                         </SelectContent>
                       </Select>
                       <FormMessage />

@@ -51,11 +51,6 @@ export const links = {
       icon: Users,
     },
     {
-      title: "Darslar",
-      url: "/app/admin/lessons",
-      icon: Book,
-    },
-    {
       title: "To'lovlar",
       url: "/app/admin/payments",
       icon: CreditCard,

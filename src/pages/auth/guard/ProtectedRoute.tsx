@@ -2,9 +2,10 @@ import { Navigate, Outlet } from "react-router-dom";
 import Cookie from "js-cookie";
 
 type Role = "admin" | "superadmin" | "teacher";
+type AllowedRole = "admin" | "teacher";
 
 interface Props {
-  allowedRoles: Role[];
+  allowedRoles: AllowedRole[];
 }
 
 const ProtectedRoute = ({ allowedRoles }: Props) => {
@@ -20,10 +21,9 @@ const ProtectedRoute = ({ allowedRoles }: Props) => {
   }
 
   // admin va superadmin ikkalasi ham admin sahifalariga kira oladi
-  const normalizedRole = role === "superadmin" ? "admin" : role;
-  const normalizedAllowedRoles = allowedRoles.map(r => r === "superadmin" ? "admin" : r);
+  const normalizedRole: AllowedRole = role === "superadmin" ? "admin" : role as AllowedRole;
 
-  if (!normalizedAllowedRoles.includes(normalizedRole as Role)) {
+  if (!allowedRoles.includes(normalizedRole)) {
     return <Navigate to="/login/teacher" replace />;
   }
 

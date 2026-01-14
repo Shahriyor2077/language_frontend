@@ -8,7 +8,13 @@ interface TooltipContextValue {
 
 const TooltipContext = React.createContext<TooltipContextValue | null>(null);
 
-function TooltipProvider({ children }: { children: React.ReactNode }) {
+function TooltipProvider({
+  children,
+  delayDuration: _delayDuration,
+}: {
+  children: React.ReactNode;
+  delayDuration?: number;
+}) {
   return <>{children}</>;
 }
 
@@ -59,11 +65,19 @@ function TooltipContent({
   className,
   sideOffset = 4,
   children,
+  side: _side,
+  align: _align,
+  hidden,
   ...props
-}: React.ComponentProps<"div"> & { sideOffset?: number }) {
+}: React.ComponentProps<"div"> & {
+  sideOffset?: number;
+  side?: "top" | "right" | "bottom" | "left";
+  align?: "start" | "center" | "end";
+  hidden?: boolean;
+}) {
   const context = React.useContext(TooltipContext);
 
-  if (!context?.open) return null;
+  if (!context?.open || hidden) return null;
 
   return (
     <div
