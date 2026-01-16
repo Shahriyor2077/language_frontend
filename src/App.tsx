@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Register from "./pages/auth/teacher/GoogleCallback";
 import Statistic from "./pages/admins/statistic/Statistic";
@@ -14,6 +14,8 @@ import ProtectedRoute from "./pages/auth/guard/ProtectedRoute";
 const App = () => {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/login/admin" replace />} />
+
       <Route path="/login/teacher" element={<Login />} />
       <Route path="/login/admin" element={<AdminLogin />} />
       <Route path="/google-callback" element={<GoogleCallback />} />
