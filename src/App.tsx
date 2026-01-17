@@ -10,6 +10,7 @@ import GoogleCallback from "./pages/auth/teacher/GoogleCallback";
 import Login from "./pages/auth/teacher/Login";
 import PhoneVerification from "./pages/auth/teacher/PhoneVerify";
 import ProtectedRoute from "./pages/auth/guard/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (
@@ -40,6 +41,9 @@ const App = () => {
           </Route>
         </Route>
       </Route>
+
+      {/* 404 - Sahifa topilmadi */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
