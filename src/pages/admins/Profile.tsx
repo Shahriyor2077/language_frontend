@@ -14,7 +14,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Pencil, Key, User, Phone, Shield, Calendar } from "lucide-react";
+import { Pencil, Key, User, Phone, Lock, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -156,7 +156,7 @@ const Profile = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Mening profilim</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">Mening profilim</h1>
           <p className="text-muted-foreground">
             Shaxsiy ma'lumotlaringizni boshqaring
           </p>
@@ -165,14 +165,14 @@ const Profile = () => {
           {!isEnvSuperAdmin && (
             <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline">
-                  <Pencil className="mr-2 h-4 w-4" />
+                <Button variant="outline" className="border-indigo-300 dark:border-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/30">
+                  <Pencil className="mr-2 h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   Tahrirlash
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-md">
+              <DialogContent className="max-w-md border-indigo-200 dark:border-indigo-800">
                 <DialogHeader>
-                  <DialogTitle>Profilni tahrirlash</DialogTitle>
+                  <DialogTitle className="text-indigo-600 dark:text-indigo-400">Profilni tahrirlash</DialogTitle>
                 </DialogHeader>
                 <Form {...profileForm}>
                   <form onSubmit={profileForm.handleSubmit((data) => updateMutation.mutate(data))} className="space-y-4">
@@ -181,9 +181,9 @@ const Profile = () => {
                       name="username"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel className="text-indigo-700 dark:text-indigo-300">Username</FormLabel>
                           <FormControl>
-                            <Input placeholder="admin_user" {...field} />
+                            <Input placeholder="admin_user" className="border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -194,15 +194,15 @@ const Profile = () => {
                       name="phoneNumber"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Telefon</FormLabel>
+                          <FormLabel className="text-indigo-700 dark:text-indigo-300">Telefon</FormLabel>
                           <FormControl>
-                            <Input placeholder="+998901234567" {...field} />
+                            <Input placeholder="+998901234567" className="border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full" disabled={updateMutation.isPending}>
+                    <Button type="submit" className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-700 dark:to-blue-700 dark:hover:from-indigo-600 dark:hover:to-blue-600 text-white" disabled={updateMutation.isPending}>
                       {updateMutation.isPending ? "Saqlanmoqda..." : "Saqlash"}
                     </Button>
                   </form>
@@ -214,14 +214,14 @@ const Profile = () => {
           {!isEnvSuperAdmin && (
             <Dialog open={isPasswordOpen} onOpenChange={setIsPasswordOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline">
-                  <Key className="mr-2 h-4 w-4" />
+                <Button variant="outline" className="border-indigo-300 dark:border-indigo-700 hover:bg-indigo-50 dark:hover:bg-indigo-900/30">
+                  <Key className="mr-2 h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   Parolni o'zgartirish
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-md">
+              <DialogContent className="max-w-md border-indigo-200 dark:border-indigo-800">
                 <DialogHeader>
-                  <DialogTitle>Parolni o'zgartirish</DialogTitle>
+                  <DialogTitle className="text-indigo-600 dark:text-indigo-400">Parolni o'zgartirish</DialogTitle>
                 </DialogHeader>
                 <Form {...passwordForm}>
                   <form onSubmit={passwordForm.handleSubmit((data) => changePasswordMutation.mutate(data))} className="space-y-4">
@@ -230,9 +230,9 @@ const Profile = () => {
                       name="currentPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Joriy parol</FormLabel>
+                          <FormLabel className="text-indigo-700 dark:text-indigo-300">Joriy parol</FormLabel>
                           <FormControl>
-                            <PasswordInput placeholder="••••••••" {...field} />
+                            <PasswordInput placeholder="••••••••" className="border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -243,9 +243,9 @@ const Profile = () => {
                       name="newPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Yangi parol</FormLabel>
+                          <FormLabel className="text-indigo-700 dark:text-indigo-300">Yangi parol</FormLabel>
                           <FormControl>
-                            <PasswordInput placeholder="••••••••" {...field} />
+                            <PasswordInput placeholder="••••••••" className="border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -256,15 +256,15 @@ const Profile = () => {
                       name="confirmPassword"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Parolni tasdiqlash</FormLabel>
+                          <FormLabel className="text-indigo-700 dark:text-indigo-300">Parolni tasdiqlash</FormLabel>
                           <FormControl>
-                            <PasswordInput placeholder="••••••••" {...field} />
+                            <PasswordInput placeholder="••••••••" className="border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button type="submit" className="w-full" disabled={changePasswordMutation.isPending}>
+                    <Button type="submit" className="w-full bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-700 dark:to-blue-700 dark:hover:from-indigo-600 dark:hover:to-blue-600 text-white" disabled={changePasswordMutation.isPending}>
                       {changePasswordMutation.isPending ? "Saqlanmoqda..." : "O'zgartirish"}
                     </Button>
                   </form>
@@ -278,60 +278,60 @@ const Profile = () => {
 
       {displayAdmin && (
         <div className="grid gap-6 md:grid-cols-2">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <User className="h-5 w-5" />
+          <Card className="border-indigo-200 dark:border-indigo-800 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border-b border-indigo-200 dark:border-indigo-800">
+              <CardTitle className="flex items-center gap-2 text-indigo-700 dark:text-indigo-300">
+                <User className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                 Asosiy ma'lumotlar
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between py-2 border-b">
+            <CardContent className="space-y-4 pt-6">
+              <div className="flex items-center justify-between py-2 border-b border-indigo-100 dark:border-indigo-800">
                 <span className="text-muted-foreground">Username</span>
-                <span className="font-medium">{displayAdmin.username}</span>
+                <span className="font-medium text-indigo-700 dark:text-indigo-300">{displayAdmin.username}</span>
               </div>
-              <div className="flex items-center justify-between py-2 border-b">
+              <div className="flex items-center justify-between py-2 border-b border-indigo-100 dark:border-indigo-800">
                 <span className="text-muted-foreground flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
+                  <Phone className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   Telefon
                 </span>
-                <span className="font-medium">{displayAdmin.phoneNumber}</span>
+                <span className="font-medium text-indigo-700 dark:text-indigo-300">{displayAdmin.phoneNumber}</span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span className="text-muted-foreground flex items-center gap-2">
-                  <Shield className="h-4 w-4" />
+                  <Lock className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
                   Rol
                 </span>
-                <Badge variant={displayAdmin.role === "superAdmin" ? "default" : "secondary"}>
+                <Badge variant={displayAdmin.role === "superAdmin" ? "default" : "secondary"} className={displayAdmin.role === "superAdmin" ? "bg-gradient-to-r from-indigo-600 to-blue-600" : ""}>
                   {roleLabels[displayAdmin.role]}
                 </Badge>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5" />
+          <Card className="border-indigo-200 dark:border-indigo-800 shadow-lg">
+            <CardHeader className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 border-b border-indigo-200 dark:border-indigo-800">
+              <CardTitle className="flex items-center gap-2 text-indigo-700 dark:text-indigo-300">
+                <Clock className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                 Qo'shimcha ma'lumotlar
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between py-2 border-b">
+            <CardContent className="space-y-4 pt-6">
+              <div className="flex items-center justify-between py-2 border-b border-indigo-100 dark:border-indigo-800">
                 <span className="text-muted-foreground">Holat</span>
-                <Badge variant={displayAdmin.isActive ? "default" : "destructive"}>
+                <Badge variant={displayAdmin.isActive ? "default" : "destructive"} className={displayAdmin.isActive ? "bg-gradient-to-r from-emerald-600 to-teal-600" : ""}>
                   {displayAdmin.isActive ? "Faol" : "Nofaol"}
                 </Badge>
               </div>
-              <div className="flex items-center justify-between py-2 border-b">
+              <div className="flex items-center justify-between py-2 border-b border-indigo-100 dark:border-indigo-800">
                 <span className="text-muted-foreground">Yaratilgan</span>
-                <span className="font-medium">
+                <span className="font-medium text-indigo-700 dark:text-indigo-300">
                   {new Date(displayAdmin.createdAt).toLocaleString("uz-UZ")}
                 </span>
               </div>
               <div className="flex items-center justify-between py-2">
                 <span className="text-muted-foreground">Oxirgi yangilanish</span>
-                <span className="font-medium">
+                <span className="font-medium text-indigo-700 dark:text-indigo-300">
                   {new Date(displayAdmin.updatedAt).toLocaleString("uz-UZ")}
                 </span>
               </div>

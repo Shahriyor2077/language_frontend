@@ -60,19 +60,24 @@ export default function Login() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-background">
+    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 dark:from-slate-950 dark:via-teal-950 dark:to-slate-900">
       <Button
         variant="outline"
-        className="absolute right-6 top-6 rounded-full px-6"
+        className="absolute right-6 top-6 rounded-full px-6 border-teal-300 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-900/30"
       >
         Sign up
       </Button>
 
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 p-8 shadow-2xl border border-teal-100 dark:border-teal-800">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-teal-100 to-cyan-100 dark:from-teal-900/30 dark:to-cyan-900/30">
+            <svg className="h-7 w-7 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z" />
+            </svg>
+          </div>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-teal-600 to-cyan-600 dark:from-teal-400 dark:to-cyan-400 bg-clip-text text-transparent">Welcome back</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to your account
+            Sign in to your teacher account
           </p>
         </div>
 
@@ -83,11 +88,11 @@ export default function Login() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-teal-700 dark:text-teal-300">Email</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Enter your Email"
-                      className="h-11"
+                      className="h-11 border-teal-200 dark:border-teal-700 focus:ring-teal-500 dark:bg-slate-800"
                       {...field}
                     />
                   </FormControl>
@@ -101,11 +106,11 @@ export default function Login() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-teal-700 dark:text-teal-300">Password</FormLabel>
                   <FormControl>
                     <PasswordInput
                       placeholder="••••••••"
-                      className="h-11"
+                      className="h-11 border-teal-200 dark:border-teal-700 focus:ring-teal-500 dark:bg-slate-800"
                       {...field}
                     />
                   </FormControl>
@@ -116,7 +121,7 @@ export default function Login() {
 
             <Button
               type="submit"
-              className="w-full h-11 text-base font-semibold"
+              className="w-full h-11 text-base font-semibold bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 dark:from-teal-700 dark:to-cyan-700 dark:hover:from-teal-600 dark:hover:to-cyan-600 text-white shadow-lg"
               disabled={isPending}
             >
               {isPending ? (
@@ -134,10 +139,10 @@ export default function Login() {
         {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
+            <span className="w-full border-t border-teal-200 dark:border-teal-700" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-white px-2 text-muted-foreground">
+            <span className="bg-white dark:bg-slate-900 px-2 text-muted-foreground">
               Or continue with
             </span>
           </div>
@@ -147,7 +152,7 @@ export default function Login() {
         <Button
           type="button"
           variant="outline"
-          className="w-full h-11 text-base font-semibold"
+          className="w-full h-11 text-base font-semibold border-teal-200 dark:border-teal-700 hover:bg-teal-50 dark:hover:bg-teal-900/30"
           onClick={handleGoogleLogin}
         >
           <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
@@ -174,7 +179,7 @@ export default function Login() {
         {/* Footer */}
         <div className="mt-6 text-center text-sm text-muted-foreground">
           Don't have an account?{" "}
-          <button className="font-medium text-primary hover:underline">
+          <button className="font-medium text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 hover:underline">
             Sign up
           </button>
         </div>

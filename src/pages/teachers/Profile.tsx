@@ -227,26 +227,30 @@ const Profile = () => {
   };
 
   return (
-    <div className=" bg-linear-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-3 sm:p-8">
-      <Card className="border-0 shadow-xl">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 dark:from-slate-950 dark:via-purple-950 dark:to-slate-900 p-3 sm:p-8">
+      <Card className="border-0 shadow-2xl overflow-hidden">
         {/* Header Section */}
-        <div className="bg-linear-to-r from-blue-600 to-indigo-600 dark:from-blue-700 dark:to-indigo-700 px-8 py-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+        <div className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 dark:from-purple-700 dark:via-pink-600 dark:to-orange-600 px-8 py-16 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+          <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
+
+          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div className="relative group">
-              <Avatar className="h-24 w-24 border-4 border-white dark:border-slate-900 shrink-0 cursor-pointer hover:opacity-80 transition-opacity">
+              <Avatar className="h-28 w-28 border-4 border-white dark:border-slate-900 shrink-0 cursor-pointer hover:opacity-90 transition-all duration-300 shadow-lg ring-4 ring-white/20">
                 <AvatarImage src={teacher.imageUrl || undefined} />
-                <AvatarFallback className="bg-blue-400 text-white text-xl font-bold">
+                <AvatarFallback className="bg-gradient-to-br from-purple-400 to-pink-400 text-white text-2xl font-bold">
                   {teacher.fullName?.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <button
                 onClick={handleImageClick}
                 disabled={isUploadingImage}
-                className="absolute bottom-0 right-0 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute bottom-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-400 disabled:to-gray-500 text-white rounded-full p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg"
                 title="Change profile picture"
               >
                 <svg
-                  className="w-4 h-4"
+                  className="w-5 h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -275,10 +279,10 @@ const Profile = () => {
             </div>
 
             <div className="flex-1 min-w-0">
-              <CardTitle className="text-3xl sm:text-4xl font-bold text-white mb-2">
+              <CardTitle className="text-3xl sm:text-4xl font-bold text-white mb-2 drop-shadow-lg">
                 {teacher.fullName}
               </CardTitle>
-              <p className="text-blue-100 text-sm sm:text-base">
+              <p className="text-white/90 text-sm sm:text-base drop-shadow">
                 {teacher.email}
               </p>
             </div>
@@ -286,9 +290,9 @@ const Profile = () => {
             <div className="flex items-center gap-2 ml-auto">
               <Badge
                 variant={teacher.isActive ? "default" : "secondary"}
-                className={`px-4 py-2 text-base font-semibold ${teacher.isActive
-                  ? "bg-emerald-500 hover:bg-emerald-600 text-white"
-                  : "bg-slate-400 hover:bg-slate-500 text-white"
+                className={`px-4 py-2 text-base font-semibold shadow-lg ${teacher.isActive
+                  ? "bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 text-white"
+                  : "bg-gradient-to-r from-gray-400 to-gray-500 hover:from-gray-500 hover:to-gray-600 text-white"
                   }`}
               >
                 {teacher.isActive ? "Active" : "Inactive"}
@@ -300,35 +304,35 @@ const Profile = () => {
         <CardContent className="p-8 space-y-8">
           {/* Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 text-center">
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl p-5 text-center border border-purple-200 dark:border-purple-700/50 hover:shadow-lg transition-shadow">
+              <p className="text-sm font-semibold text-purple-700 dark:text-purple-300 mb-2">
                 Completed Lessons
               </p>
-              <p className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">
+              <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {completedLessonsCount}
               </p>
             </div>
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 text-center">
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <div className="bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/30 dark:to-pink-800/30 rounded-xl p-5 text-center border border-pink-200 dark:border-pink-700/50 hover:shadow-lg transition-shadow">
+              <p className="text-sm font-semibold text-pink-700 dark:text-pink-300 mb-2">
                 Total Lessons
               </p>
-              <p className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">
+              <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-pink-600 to-orange-600 bg-clip-text text-transparent">
                 {totalLessons}
               </p>
             </div>
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 text-center">
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/30 rounded-xl p-5 text-center border border-orange-200 dark:border-orange-700/50 hover:shadow-lg transition-shadow">
+              <p className="text-sm font-semibold text-orange-700 dark:text-orange-300 mb-2">
                 Hourly Rate
               </p>
-              <p className="text-2xl sm:text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+              <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
                 {teacher.hourPrice !== null ? `$${teacher.hourPrice}` : "—"}
               </p>
             </div>
-            <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 text-center">
-              <p className="text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+            <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 rounded-xl p-5 text-center border border-red-200 dark:border-red-700/50 hover:shadow-lg transition-shadow">
+              <p className="text-sm font-semibold text-red-700 dark:text-red-300 mb-2">
                 Experience
               </p>
-              <p className="text-lg sm:text-2xl font-bold text-slate-700 dark:text-slate-200">
+              <p className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
                 {teacher.experience || "—"}
               </p>
             </div>
@@ -339,7 +343,7 @@ const Profile = () => {
             {/* Left Column */}
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3">
                   Phone Number
                 </label>
                 {isEdit ? (
@@ -348,7 +352,7 @@ const Profile = () => {
                     onChange={(e) =>
                       setForm({ ...form, phoneNumber: e.target.value })
                     }
-                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                    className="bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-700 focus:ring-purple-500"
                   />
                 ) : (
                   <p className="text-slate-600 dark:text-slate-400">
@@ -358,7 +362,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-pink-700 dark:text-pink-300 mb-3">
                   Specification
                 </label>
                 {isEdit ? (
@@ -368,7 +372,7 @@ const Profile = () => {
                       setForm({ ...form, specification: value })
                     }
                   >
-                    <SelectTrigger className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700">
+                    <SelectTrigger className="bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-700 focus:ring-pink-500">
                       <SelectValue placeholder="Select specialty" />
                     </SelectTrigger>
                     <SelectContent>
@@ -389,7 +393,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-orange-700 dark:text-orange-300 mb-3">
                   Level
                 </label>
                 {isEdit ? (
@@ -399,7 +403,7 @@ const Profile = () => {
                       setForm({ ...form, level: value })
                     }
                   >
-                    <SelectTrigger className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700">
+                    <SelectTrigger className="bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-700 focus:ring-orange-500">
                       <SelectValue placeholder="Select level" />
                     </SelectTrigger>
                     <SelectContent>
@@ -421,12 +425,12 @@ const Profile = () => {
             {/* Right Column */}
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-red-700 dark:text-red-300 mb-3">
                   Hourly Price
                 </label>
                 {isEdit ? (
                   <div className="relative">
-                    <span className="absolute left-3 top-2.5 text-slate-600 dark:text-slate-400">
+                    <span className="absolute left-3 top-2.5 text-red-600 dark:text-red-400 font-semibold">
                       $
                     </span>
                     <Input
@@ -437,7 +441,7 @@ const Profile = () => {
                       onChange={(e) =>
                         setForm({ ...form, hourPrice: e.target.value })
                       }
-                      className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 pl-7"
+                      className="bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700 pl-7 focus:ring-red-500"
                     />
                   </div>
                 ) : (
@@ -450,7 +454,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-purple-700 dark:text-purple-300 mb-3">
                   Portfolio
                 </label>
                 {isEdit ? (
@@ -461,14 +465,14 @@ const Profile = () => {
                       setForm({ ...form, portfolioLink: e.target.value })
                     }
                     placeholder="https://example.com/portfolio"
-                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                    className="bg-purple-50 dark:bg-purple-900/20 border-purple-200 dark:border-purple-700 focus:ring-purple-500"
                   />
                 ) : teacher.portfolioLink ? (
                   <a
                     href={teacher.portfolioLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium underline"
+                    className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium underline"
                   >
                     View Portfolio →
                   </a>
@@ -480,7 +484,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-pink-700 dark:text-pink-300 mb-3">
                   Teacher experience
                 </label>
                 {isEdit ? (
@@ -489,7 +493,7 @@ const Profile = () => {
                     onChange={(e) =>
                       setForm({ ...form, experience: e.target.value })
                     }
-                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                    className="bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-700 focus:ring-pink-500"
                   />
                 ) : (
                   <p className="text-slate-600 dark:text-slate-400">
@@ -499,7 +503,7 @@ const Profile = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200 mb-3">
+                <label className="block text-sm font-semibold text-orange-700 dark:text-orange-300 mb-3">
                   Teacher Card
                 </label>
                 {isEdit ? (
@@ -515,7 +519,7 @@ const Profile = () => {
                     inputMode="numeric"
                     pattern="[0-9]*"
                     maxLength={16}
-                    className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700"
+                    className="bg-orange-50 dark:bg-orange-900/20 border-orange-200 dark:border-orange-700 focus:ring-orange-500"
                   />
                 ) : (
                   <p className="text-slate-600 dark:text-slate-400">
@@ -529,13 +533,13 @@ const Profile = () => {
           {/* Description Section */}
           {(isEdit || teacher.description) && (
             <div className="space-y-3">
-              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">
+              <label className="block text-sm font-semibold bg-gradient-to-r from-purple-700 to-pink-700 dark:from-purple-300 dark:to-pink-300 bg-clip-text text-transparent">
                 Description
               </label>
               {isEdit ? (
                 <Textarea
                   rows={5}
-                  className="bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 resize-none focus:ring-blue-500"
+                  className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 border-purple-200 dark:border-purple-700 resize-none focus:ring-purple-500"
                   value={form.description}
                   onChange={(e) =>
                     setForm({ ...form, description: e.target.value })
@@ -551,21 +555,21 @@ const Profile = () => {
           )}
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="flex flex-col sm:flex-row justify-end gap-3 pt-4 border-t border-purple-200 dark:border-purple-700/50">
             {isEdit ? (
               <>
                 <Button
                   variant="outline"
                   onClick={handleCancel}
                   disabled={isUpdating}
-                  className="sm:order-2 border-slate-300 dark:border-slate-600 bg-transparent"
+                  className="sm:order-2 border-purple-300 dark:border-purple-600 bg-transparent hover:bg-purple-50 dark:hover:bg-purple-900/20"
                 >
                   Cancel
                 </Button>
                 <Button
                   onClick={handleSave}
                   disabled={isUpdating}
-                  className="sm:order-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold"
+                  className="sm:order-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 dark:from-purple-700 dark:to-pink-700 dark:hover:from-purple-600 dark:hover:to-pink-600 text-white font-semibold shadow-lg"
                 >
                   {isUpdating ? "Saving..." : "Save Changes"}
                 </Button>
@@ -573,7 +577,7 @@ const Profile = () => {
             ) : (
               <Button
                 onClick={handleEdit}
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 dark:from-purple-700 dark:to-pink-700 dark:hover:from-purple-600 dark:hover:to-pink-600 text-white font-semibold shadow-lg"
               >
                 Edit Profile
               </Button>

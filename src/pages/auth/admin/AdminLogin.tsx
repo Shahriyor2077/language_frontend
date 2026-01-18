@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form";
 import { PasswordInput } from "@/components/ui/password-input";
 import { Spinner } from "@/components/ui/spinner";
-import { Shield } from "lucide-react";
+import { Lock } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(3, "Username kamida 3 ta belgi bo'lishi kerak"),
@@ -67,13 +67,13 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl">
+    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 dark:from-slate-950 dark:via-indigo-950 dark:to-slate-900">
+      <div className="w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 p-8 shadow-2xl border border-indigo-100 dark:border-indigo-800">
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-            <Shield className="h-8 w-8 text-primary" />
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-indigo-100 to-blue-100 dark:from-indigo-900/30 dark:to-blue-900/30">
+            <Lock className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight">Admin Panel</h1>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-indigo-600 to-blue-600 dark:from-indigo-400 dark:to-blue-400 bg-clip-text text-transparent">Admin Panel</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Tizimga kirish uchun ma'lumotlaringizni kiriting
           </p>
@@ -86,11 +86,11 @@ export default function AdminLogin() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel className="text-indigo-700 dark:text-indigo-300">Username</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Username kiriting"
-                      className="h-11"
+                      className="h-11 border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500 dark:bg-slate-800"
                       {...field}
                     />
                   </FormControl>
@@ -104,11 +104,11 @@ export default function AdminLogin() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Parol</FormLabel>
+                  <FormLabel className="text-indigo-700 dark:text-indigo-300">Parol</FormLabel>
                   <FormControl>
                     <PasswordInput
                       placeholder="••••••••"
-                      className="h-11"
+                      className="h-11 border-indigo-200 dark:border-indigo-700 focus:ring-indigo-500 dark:bg-slate-800"
                       {...field}
                     />
                   </FormControl>
@@ -119,7 +119,7 @@ export default function AdminLogin() {
 
             <Button
               type="submit"
-              className="w-full h-11 text-base font-semibold"
+              className="w-full h-11 text-base font-semibold bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 dark:from-indigo-700 dark:to-blue-700 dark:hover:from-indigo-600 dark:hover:to-blue-600 text-white shadow-lg"
               disabled={isPending}
             >
               {isPending ? (
