@@ -207,8 +207,6 @@ const Earnings = () => {
         </Table>
       </div>
 
-
-      {/* View Dialog */}
       <Dialog open={!!viewingPayment} onOpenChange={() => setViewingPayment(null)}>
         <DialogContent>
           <DialogHeader>
@@ -265,7 +263,6 @@ const Earnings = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Cancel Dialog */}
       <Dialog open={!!cancellingPayment} onOpenChange={() => setCancellingPayment(null)}>
         <DialogContent>
           <DialogHeader>

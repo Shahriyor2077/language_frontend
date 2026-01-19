@@ -180,7 +180,6 @@ const LessonCreationForm = () => {
         )}
 
         <div className="space-y-6">
-          {/* Lesson Name */}
           <div>
             <Label
               htmlFor="name"
@@ -203,7 +202,6 @@ const LessonCreationForm = () => {
             )}
           </div>
 
-          {/* Date Picker */}
           <div>
             <Label className="block text-sm font-semibold mb-2 text-teal-700 dark:text-teal-300">
               Lesson Date
@@ -304,9 +302,7 @@ const LessonCreationForm = () => {
             )}
           </div>
 
-          {/* Time and Duration Grid */}
           <div className="grid grid-cols-2 gap-4">
-            {/* Time Selector */}
             <div>
               <Label
                 htmlFor="time"
@@ -341,7 +337,6 @@ const LessonCreationForm = () => {
               )}
             </div>
 
-            {/* Duration Selector */}
             <div>
               <Label
                 htmlFor="duration"
@@ -379,7 +374,6 @@ const LessonCreationForm = () => {
             </div>
           </div>
 
-          {/* Price */}
           <div>
             <Label
               htmlFor="price"
@@ -410,7 +404,6 @@ const LessonCreationForm = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             disabled={isPending}

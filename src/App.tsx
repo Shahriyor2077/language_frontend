@@ -42,7 +42,6 @@ const App = () => {
         </Route>
       </Route>
 
-      {/* 404 - Sahifa topilmadi */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

@@ -7,7 +7,6 @@ const MainLayout = () => {
   const location = useLocation();
   const cookieRole = Cookie.get("role");
 
-  // Determine role based on URL path and cookie
   const isAdminPath = location.pathname.startsWith("/app/admin");
   let role: "teacher" | "admin" | "superAdmin" = "teacher";
 

@@ -561,7 +561,6 @@ const Admins = () => {
       </Dialog>
 
 
-      {/* Change Password Dialog */}
       <Dialog open={!!changingPasswordAdmin} onOpenChange={() => setChangingPasswordAdmin(null)}>
         <DialogContent className="max-w-md">
           <DialogHeader>
@@ -616,7 +615,6 @@ const Admins = () => {
         </DialogContent>
       </Dialog>
 
-      {/* View Dialog */}
       <Dialog open={!!viewingAdmin} onOpenChange={() => setViewingAdmin(null)}>
         <DialogContent>
           <DialogHeader>

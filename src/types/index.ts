@@ -1,4 +1,3 @@
-// Admin types
 export type AdminRole = "admin" | "superAdmin";
 
 export interface Admin {
@@ -36,7 +35,6 @@ export interface UpdateAdminDto {
     newPassword?: string;
 }
 
-// Teacher types
 export type TeacherSpecialty = "english" | "french" | "spanish" | "italian" | "german";
 export type TeacherLevel = "b2" | "c1" | "c2";
 
@@ -60,7 +58,6 @@ export interface Teacher {
     updatedAt: string;
 }
 
-// Student types
 export interface Student {
     id: string;
     lastName: string;
@@ -85,7 +82,6 @@ export interface StudentQueryParams {
     isBlocked?: boolean;
 }
 
-// Lesson types
 export type LessonStatus = "available" | "booked" | "completed" | "cancelled";
 
 export interface Lesson {
@@ -108,7 +104,6 @@ export interface Lesson {
     student?: Student;
 }
 
-// Transaction types
 export type TransactionStatus = "pending" | "paid" | "cancelled";
 
 export interface Transaction {
@@ -135,7 +130,6 @@ export interface TransactionQueryParams {
     lessonId?: string;
 }
 
-// Teacher Payment types
 export interface TeacherPayment {
     id: string;
     teacherId: string;
@@ -158,7 +152,6 @@ export interface TeacherPayment {
     lesson?: Lesson;
 }
 
-// Pagination response
 export interface PaginatedResponse<T> {
     data: T[];
     meta: {
@@ -169,7 +162,6 @@ export interface PaginatedResponse<T> {
     };
 }
 
-// Auth types
 export interface LoginDto {
     username: string;
     password: string;

@@ -514,7 +514,6 @@ const Teachers = () => {
         </Table>
       </div>
 
-      {/* Delete Confirm Dialog */}
       <ConfirmDialog
         open={!!deletingTeacher}
         onOpenChange={() => setDeletingTeacher(null)}
@@ -525,8 +524,6 @@ const Teachers = () => {
         isLoading={deleteMutation.isPending}
       />
 
-
-      {/* Edit Dialog */}
       <Dialog open={!!editingTeacher} onOpenChange={() => setEditingTeacher(null)}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
@@ -689,8 +686,6 @@ const Teachers = () => {
         </DialogContent>
       </Dialog>
 
-
-      {/* View Dialog */}
       <Dialog open={!!viewingTeacher} onOpenChange={() => setViewingTeacher(null)}>
         <DialogContent>
           <DialogHeader>

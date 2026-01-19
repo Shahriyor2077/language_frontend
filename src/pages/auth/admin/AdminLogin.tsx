@@ -47,7 +47,6 @@ export default function AdminLogin() {
       onSuccess: (res) => {
         Cookie.set("token", res.accessToken);
         Cookie.set("role", res.role.toLowerCase());
-        // Admin ma'lumotlarini localStorage ga saqlash
         localStorage.setItem("admin", JSON.stringify({
           id: res.id,
           role: res.role,

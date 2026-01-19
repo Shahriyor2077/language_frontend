@@ -39,7 +39,6 @@ const Payments = () => {
     <div className="p-6 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 dark:from-slate-950 dark:via-teal-950 dark:to-slate-900 min-h-screen">
       <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r from-teal-600 to-cyan-600 dark:from-teal-400 dark:to-cyan-400 bg-clip-text text-transparent">My Payments</h1>
 
-      {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div className="bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/30 dark:to-cyan-900/30 p-6 rounded-xl shadow-md border border-teal-200 dark:border-teal-700">
           <p className="text-sm text-teal-700 dark:text-teal-300 font-medium">Total Earnings</p>

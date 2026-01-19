@@ -148,7 +148,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Google Sign In Button */}
         <Button
           type="button"
           variant="outline"

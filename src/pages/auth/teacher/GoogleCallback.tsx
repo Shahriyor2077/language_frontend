@@ -1,4 +1,3 @@
-// GoogleCallback.tsx
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Cookie from "js-cookie";
@@ -11,7 +10,6 @@ export default function GoogleCallback() {
 
   useEffect(() => {
     const handleCallback = () => {
-      // Get params from URL (your backend should redirect with these)
       const accessToken = searchParams.get("accessToken");
       const isNewUser = searchParams.get("isNewUser");
       const email = searchParams.get("email");
@@ -33,16 +31,13 @@ export default function GoogleCallback() {
         return;
       }
 
-      // Store the Google token temporarily
       Cookie.set("google_temp_token", accessToken, { expires: 1 / 24 }); // 1 hour
 
       if (isNewUser === "true") {
-        // New user needs to complete registration
         navigate("/phone-verification", {
           state: { email, googleToken: accessToken },
         });
       } else {
-        // Existing user - direct login
         Cookie.set("token", accessToken);
         Cookie.set("role", "teacher");
         toast.success("Successfully logged in with Google", {

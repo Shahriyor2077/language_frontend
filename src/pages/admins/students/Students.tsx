@@ -190,7 +190,6 @@ const Students = () => {
       </div>
 
 
-      {/* Pagination */}
       {meta && meta.totalPage > 1 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">Jami: {meta.total} ta o'quvchi</p>
@@ -218,7 +217,6 @@ const Students = () => {
         </div>
       )}
 
-      {/* Delete Confirm Dialog */}
       <ConfirmDialog
         open={!!deletingStudent}
         onOpenChange={() => setDeletingStudent(null)}
@@ -286,7 +284,6 @@ const Students = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Block Dialog */}
       <Dialog open={!!blockingStudent} onOpenChange={() => setBlockingStudent(null)}>
         <DialogContent>
           <DialogHeader>

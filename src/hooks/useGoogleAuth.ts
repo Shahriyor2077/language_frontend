@@ -1,18 +1,14 @@
-// service/useGoogleAuth.ts
+
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
-// ============================================
-// TYPE DEFINITIONS
-// ============================================
-
 interface SendOtpRequest {
   confirmPassword: string;
   password: string;
   phoneNumber: string;
-  token: string; // Google access token
+  token: string; 
 }
 
 interface SendOtpResponse {
@@ -24,7 +20,7 @@ interface VerifyOtpRequest {
   phoneNumber: string;
   otp: string;
   password: string;
-  token: string; // Google access token
+  token: string; 
 }
 
 interface VerifyOtpResponse {
@@ -36,14 +32,7 @@ interface VerifyOtpResponse {
   accessToken: string;
 }
 
-// ============================================
-// HOOKS
-// ============================================
 
-/**
- * Hook to send OTP to phone number
- * Usage: const { mutate: sendOtp, isPending } = useSendOtp();
- */
 export const useSendOtp = () => {
   return useMutation({
     mutationFn: async (data: SendOtpRequest) => {
@@ -71,10 +60,7 @@ export const useSendOtp = () => {
   });
 };
 
-/**
- * Hook to verify OTP and set password
- * Usage: const { mutate: verifyOtp, isPending } = useVerifyOtp();
- */
+
 export const useVerifyOtp = () => {
   return useMutation({
     mutationFn: async (data: VerifyOtpRequest) => {
@@ -95,7 +81,6 @@ export const useVerifyOtp = () => {
   });
 };
 
-// Export types for use in components
 export type {
   SendOtpRequest,
   SendOtpResponse,

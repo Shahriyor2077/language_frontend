@@ -19,7 +19,6 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { Spinner } from "@/components/ui/spinner";
 import { useSendOtp, useVerifyOtp } from "@/hooks/useGoogleAuth";
 
-// Step 1: Phone + Password
 const phoneSchema = z
   .object({
     phoneNumber: z
@@ -40,7 +39,6 @@ const phoneSchema = z
     path: ["confirmPassword"],
   });
 
-// Step 2: Only OTP
 const verifySchema = z.object({
   otp: z.string().length(6, "OTP must be 6 digits"),
 });
@@ -84,7 +82,6 @@ export default function PhoneVerification() {
   });
 
   const onPhoneSubmit = (data: z.infer<typeof phoneSchema>) => {
-    // Store password for later use
     setPassword(data.password);
 
     sendOtp(
@@ -126,14 +123,11 @@ export default function PhoneVerification() {
             position: "bottom-right",
           });
 
-          // Clear temp token
           Cookie.remove("google_temp_token");
 
-          // Set real tokens
           Cookie.set("token", res.accessToken);
           Cookie.set("role", "teacher");
 
-          // Navigate to profile
           navigate("/app/teacher/profile");
         },
         onError: (error: any) => {

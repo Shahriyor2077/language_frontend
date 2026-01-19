@@ -199,7 +199,6 @@ const Lessons = () => {
         </Table>
       </div>
 
-      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">Jami: {totalCount} ta dars</p>
@@ -227,7 +226,6 @@ const Lessons = () => {
         </div>
       )}
 
-      {/* View Dialog */}
       <Dialog open={!!viewingLesson} onOpenChange={() => setViewingLesson(null)}>
         <DialogContent className="max-w-lg">
           <DialogHeader>

@@ -20,7 +20,6 @@ const ProtectedRoute = ({ allowedRoles }: Props) => {
     return <Navigate to="/login/teacher" replace />;
   }
 
-  // admin va superadmin ikkalasi ham admin sahifalariga kira oladi
   const normalizedRole: AllowedRole = role === "superadmin" ? "admin" : role as AllowedRole;
 
   if (!allowedRoles.includes(normalizedRole)) {

@@ -213,7 +213,6 @@ const Payments = () => {
       </div>
 
 
-      {/* Pagination */}
       {meta && meta.totalPage > 1 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">Jami: {meta.total} ta to'lov</p>
@@ -241,7 +240,6 @@ const Payments = () => {
         </div>
       )}
 
-      {/* View Dialog */}
       <Dialog open={!!viewingTransaction} onOpenChange={() => setViewingTransaction(null)}>
         <DialogContent>
           <DialogHeader>
@@ -296,7 +294,6 @@ const Payments = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Cancel Dialog */}
       <Dialog open={!!cancellingTransaction} onOpenChange={() => setCancellingTransaction(null)}>
         <DialogContent>
           <DialogHeader>
